@@ -1,12 +1,22 @@
 # This file is derived from https://github.com/Mailu/Mailu/blob/master/docs/kubernetes/mailu/pvc.yaml
-
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: repd1-us-central1-b-c
+  namespace: mailu
+provisioner:  kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  replication-type: regional-pd
+  zones: us-central1-b,us-central1-c
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ include "mailu.fullname" . }}-storage
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
 {{- if ( eq "hostPath" (required "persistence.type" .Values.persistence.type)) }}
   volumeName: {{ include "mailu.fullname" . }}-storage
 {{- end }}
