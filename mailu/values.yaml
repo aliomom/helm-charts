@@ -1,8 +1,8 @@
 # Default values for mailu.
 
 # A list of mail hostnames is required. The first will be used as primary mail hostname
-#  hostnames:
-#    - mail.example.com
+hostnames:
+  - mail.example.com
 #    - imap.example.com
 
 # The mail domain is required. See https://github.com/Mailu/Mailu/blob/master/docs/faq.rst#what-is-the-difference-between-domain-and-hostnames
@@ -40,7 +40,7 @@ database:
 persistence:
   size: 100Gi
   type: hostPath
-  # storageClass: default
+  storageClass: standard
 #  hostPath: /path/on/the/host
 
 # Change this if you're using different address ranges for pods
